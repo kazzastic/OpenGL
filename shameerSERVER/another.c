@@ -6,19 +6,50 @@
 #endif
 
 #include <stdlib.h>
-void init();
+void init_lineEW();
+void init_boxes();
 void lineSegment();
 void trigonometry();
 void some_para();
 void lines_ew();
+void boxes();
+void weird_lines();
+void init_weird();
 
-void init(){
+void init_lineEW(){
     glClearColor(1.0,1.0,1.0,1.0);
     glColor3f(0.0,0.0,0.0);
-    //glPointSize(50.0);
     glLineWidth(8.0);
-    //glMatrixMode(GL_PROJECTION);
     gluOrtho2D(0, 600, 0, 600);
+}
+void init_lineSeg(){
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glLineWidth(10.0);
+    gluOrtho2D(0, 600, 0, 600);
+}
+void init_boxes(){
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glPointSize(50.0);
+    gluOrtho2D(0, 600, 0, 600);
+}
+void init_weird(){
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glLineWidth(5.0);
+    gluOrtho2D(0, 600, 0, 600);
+}
+void weird_lines(){
+    glClear(GL_COLOR_BUFFER_BIT);
+    glBegin(GL_LINE_LOOP);
+        glVertex2i(100, 0);
+        glVertex2i(100,400);
+        glVertex2i(100, 400);
+        glVertex2i(400, 0);
+        glVertex2i(400, 0);
+        glVertex2i(400, 400);
+    glEnd();
+    glFlush();
 }
 void lines_ew(){
     glClear(GL_COLOR_BUFFER_BIT);
@@ -30,7 +61,7 @@ void lines_ew(){
     glEnd();
     glFlush();
 }
-void lineSegment(){
+void boxes(){
     glClear(GL_COLOR_BUFFER_BIT);
     glBegin(GL_POINTS);
         glColor3f(0.0, 0.0, 0.0);
@@ -70,13 +101,21 @@ void some_para(){
         glVertex2i(300, 200);
     glEnd();
 }
+void lineSegment(){
+    glClear(GL_COLOR_BUFFER_BIT);
+    glBegin(GL_LINES);
+        glVertex2i(0, 600);
+        glVertex2i(600, 0);
+    glEnd();
+    glFlush();
+}
 int main(int argc, char**argv){
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("A New Thing");
-    glutDisplayFunc(lineSegment);
-    init();
+    glutDisplayFunc(weird_lines);
+    init_weird();
     glutMainLoop();
 }
